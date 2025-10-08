@@ -29,17 +29,14 @@ $STARSHIP_CONFIG = Path(__file__).parent / "starship_xonsh.toml"
 $VI_MODE = True
 
 # ---- Path
-$PATH.insert(0, "/home/wodan/.local/bin")
-$PATH.append("/home/wodan/.cargo/bin")
-$PATH.append("/home/wodan/go/bin")
-# $PATH.append("/home/wodan/.local/jdk/bin")
-# $PATH.append("/home/wodan/.local/maven/bin")
+$PATH.insert(0, "$HOME/.local/bin")
+$PATH.append("$HOME/.cargo/bin")
+$PATH.append("$HOME/go/bin")
 
 # -------------------------------------
 # Load Xontribs
 # -------------------------------------
 
-# $XONSH_COLOR_STYLE = 'material'
 xontrib load coreutils
 xontrib load prompt_starship
 xontrib load sh
@@ -47,9 +44,6 @@ xontrib load argcomplete
 
 # ---- Configurations for Xontribs
 $XLSD_SORT_METHOD = "directories_first"
-
-# ---- Java Env Vars
-# $JAVA_HOME = "/home/wodan/.local/jdk"
 
 # -------------------------------------
 # Aliases
@@ -59,7 +53,7 @@ $XLSD_SORT_METHOD = "directories_first"
 # This is the directory name in ~/.config
 # $NVIM_APPNAME = "AstroNvim"
 
-# aliases['nvim'] = "/home/wodan/.local/bin/nvim"
+# aliases['nvim'] = "$HOME/.local/bin/nvim"
 aliases['vi'] = "nvim"
 aliases['vim'] = "nvim"
 aliases["ovi"] = "/bin/vi"
@@ -75,12 +69,8 @@ aliases["ldock"] = "lazydocker"
 aliases["lgit"] = "lazygit"
 
 # ---- Python Env Activates
-aliases["dev"] = "source-bash /home/wodan/.envs/dev/bin/activate"
-aliases["qtile"] = "source-bash /home/wodan/.envs/qtile/bin/activate"
-aliases["py12"] = "source-bash /home/wodan/.envs/py12/bin/activate"
-aliases["spark"] = "source-bash /home/wodan/.envs/spark/bin/activate"
-# aliases["ops"] = "source-bash /home/wodan/.envs/ops/bin/activate"
-# aliases["dj"] = "source-bash /home/wodan/.envs/dj/bin/activate"
+aliases["dev"] = "source-bash $HOME/.envs/dev/bin/activate"
+aliases["spark"] = "source-bash $HOME/.envs/spark/bin/activate"
 
 # ---- kubectl aliases
 # aliases["mkctl"] = "microk8s kubectl"
@@ -89,12 +79,12 @@ aliases["spark"] = "source-bash /home/wodan/.envs/spark/bin/activate"
 # Node Version Manager, Node and NPM
 # -------------------------------------
 
-$NVM_DIR = "/home/wodan/.config/nvm"
+$NVM_DIR = "$HOME/.config/nvm"
 source-bash $NVM_DIR/nvm.sh
 
 # -------------------------------------
 # Activate a Default Python Env
 # -------------------------------------
 
-source-bash /home/wodan/.envs/dev/bin/activate
+source-bash $HOME/.envs/dev/bin/activate
 
