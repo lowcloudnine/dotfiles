@@ -69,6 +69,7 @@ aliases['ls'] = "eza"
 aliases['ll'] = "eza -al"
 aliases["fd"] = "fdfind -E snap"
 aliases["pwd"] = display_current_dir 
+aliases["tree"] = "tree -C -I '.git'"
 
 aliases["ldock"] = "lazydocker"
 aliases["lgit"] = "lazygit"
