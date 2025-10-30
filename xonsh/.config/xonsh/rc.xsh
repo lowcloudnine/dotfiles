@@ -58,7 +58,7 @@ aliases['vi'] = "nvim"
 aliases['vim'] = "nvim"
 aliases["ovi"] = "/bin/vi"
 
-aliases['cat'] = "bat"
+aliases['cat'] = "batcat"
 aliases['ls'] = "eza"
 aliases['ll'] = "eza -al"
 aliases["fd"] = "fdfind -E snap"
@@ -70,7 +70,7 @@ aliases["lgit"] = "lazygit"
 
 # ---- Python Env Activates
 aliases["dev"] = "source-bash $HOME/.envs/dev/bin/activate"
-aliases["spark"] = "source-bash $HOME/.envs/spark/bin/activate"
+# aliases["spark"] = "source-bash $HOME/.envs/spark/bin/activate"
 
 # ---- kubectl aliases
 # aliases["mkctl"] = "microk8s kubectl"
@@ -79,12 +79,13 @@ aliases["spark"] = "source-bash $HOME/.envs/spark/bin/activate"
 # Node Version Manager, Node and NPM
 # -------------------------------------
 
-$NVM_DIR = "$HOME/.config/nvm"
+$NVM_DIR = "/home/wodan/.nvm"
 source-bash $NVM_DIR/nvm.sh
+# nvm use stable
 
 # -------------------------------------
 # Activate a Default Python Env
 # -------------------------------------
 
-source-bash $HOME/.envs/dev/bin/activate
+source-bash $HOME/.local/envs/dev/bin/activate
 
