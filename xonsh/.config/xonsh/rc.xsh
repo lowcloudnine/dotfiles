@@ -87,6 +87,6 @@ source-bash $NVM_DIR/nvm.sh
 # Activate a Default Python Env
 # -------------------------------------
 
-source-bash $HOME/.local/envs/dev/bin/activate
+source-bash $HOME/.envs/dev/bin/activate
 
 fastfetch
