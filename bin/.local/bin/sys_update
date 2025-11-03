@@ -1,0 +1,17 @@
+#!/usr/bin/env  bash
+
+# Ubuntu 24 system updates and anything installeld via apt
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+
+# Update the various snaps
+sudo snap refresh
+
+# Update various languages and other packages of stuff
+rustup upgrade # <-- rustup is installed via snap so only update rust here
+
+# Update Python and the dev env libs
+uv self update
+source /home/wodan/.envs/dev/bin/activate
+uv pip install --upgrade ansible
+uv pip install --upgrade ruff
+uv pip install --upgrade click
