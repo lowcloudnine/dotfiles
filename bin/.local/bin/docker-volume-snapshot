@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+
+# See usage and original place I got the script from at:
+# https://stackoverflow.com/questions/21597463/how-to-port-data-only-volumes-from-one-host-to-another
+# and the github repo:
+# https://stackoverflow.com/questions/21597463/how-to-port-data-only-volumes-from-one-host-to-another
+
 set -e -o pipefail
 
 programname=$(basename "$0")
