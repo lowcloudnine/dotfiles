@@ -89,3 +89,4 @@ source-bash $NVM_DIR/nvm.sh
 
 source-bash $HOME/.local/envs/dev/bin/activate
 
+fastfetch
