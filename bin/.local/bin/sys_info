@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+fastfetch --config examples/7.jsonc
