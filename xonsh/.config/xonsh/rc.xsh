@@ -27,6 +27,14 @@ def display_current_dir():
 $SHELL_TYPE = "best"
 $STARSHIP_CONFIG = Path(__file__).parent / "starship_xonsh.toml"
 $VI_MODE = True
+# ---- fzf
+skip_dirs = ".git,.venv,.idea,.vscode,__pycache__,node_modules,target"
+$FZF_DEFAULT_OPTS = " ".join([
+    "--style full",
+    f"--walker-skip {skip_dirs}", 
+    "--preview 'bat -n --color=always {}' ",
+    "--bind 'ctrl-/:change-preview-window(|hidden)'",
+])
 
 # ---- Path
 $PATH.insert(0, "$HOME/.local/bin")
@@ -37,13 +45,23 @@ $PATH.append("$HOME/go/bin")
 # Load Xontribs
 # -------------------------------------
 
+xontrib load argcomplete
 xontrib load coreutils
+xontrib load "fzf-widgets"
 xontrib load prompt_starship
 xontrib load sh
-xontrib load argcomplete
 
 # ---- Configurations for Xontribs
 $XLSD_SORT_METHOD = "directories_first"
+
+# ---- fzf widgets configuration
+$fzf_history_binding = "c-r"  # Ctrl+R
+$fzf_ssh_binding = "c-s"      # Ctrl+S
+$fzf_file_binding = "c-t"      # Ctrl+T
+$fzf_dir_binding = "c-g"      # Ctrl+G
+
+$fzf_find_command = "fd"
+$fzf_find_dirs_command = "fd -t d"
 
 # -------------------------------------
 # Aliases
@@ -63,17 +81,23 @@ aliases['ls'] = "eza"
 aliases['ll'] = "eza -al"
 aliases["fd"] = "fdfind -E snap"
 aliases["pwd"] = display_current_dir 
-aliases["tree"] = "tree -C -I '.git'"
+aliases["tree"] = "tree -C -I '.git' -I '__pycache__' -I '*.egg-info'"
 
 aliases["ldock"] = "lazydocker"
 aliases["lgit"] = "lazygit"
 
 # ---- Python Env Activates
 aliases["dev"] = "source-bash $HOME/.envs/dev/bin/activate"
-# aliases["spark"] = "source-bash $HOME/.envs/spark/bin/activate"
 
-# ---- kubectl aliases
+# ---- kubectl aliases # if using microk8s
 # aliases["mkctl"] = "microk8s kubectl"
+
+# -------------------------------------
+# Flatpak Stuff
+# -------------------------------------
+
+$XDG_DATA_DIRS.append("/var/lib/flatpak/exports/share")
+$XDG_DATA_DIRS.append("/home/wodan/.local/share/flatpak/exports/share")
 
 # -------------------------------------
 # Node Version Manager, Node and NPM
@@ -88,5 +112,3 @@ source-bash $NVM_DIR/nvm.sh
 # -------------------------------------
 
 source-bash $HOME/.envs/dev/bin/activate
-
-fastfetch

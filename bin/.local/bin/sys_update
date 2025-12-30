@@ -6,6 +6,10 @@ sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
 # Update the various snaps
 sudo snap refresh
 
+# Update any flatpak packages
+sudo flatpak update
+flatpak update
+
 # Update various languages and other packages of stuff
 rustup upgrade # <-- rustup is installed via snap so only update rust here
 
