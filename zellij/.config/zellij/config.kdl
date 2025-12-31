@@ -187,7 +187,10 @@ plugins {
     tab-bar { path "tab-bar"; }
     status-bar { path "status-bar"; }
     strider { path "strider"; }
-    compact-bar { path "compact-bar"; }
+    // compact-bar { path "compact-bar"; }
+    compact-bar location="zellij:compact-bar" {
+        tooltip "F1"
+    } 
     session-manager { path "session-manager"; }
 }
 
@@ -204,7 +207,9 @@ plugins {
 //    - true
 //    - false (Default)
 //
-simplified_ui true
+simplified_ui true 
+
+show_startup_tips false
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL

@@ -1,1 +1,7 @@
-fastfetch --config examples/7.jsonc
+#!/usr/bin/env python
+
+import subprocess
+
+if __name__ == "__main__":
+    subprocess.run(["fastfetch", "--config", "examples/7.jsonc"])
+
