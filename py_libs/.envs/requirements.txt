@@ -1,0 +1,49 @@
+# System Tools/Libs
+# -----------------
+ansible>=13
+ansible-core>=2.19.3
+
+# CLI Frameworks and Utilities
+# ----------------------------
+click>=8.3.0
+rich>=14.2.0
+textual>=6.3.0
+
+# Astral Tooling and Libs
+# -----------------------
+ruff>=0.14.3
+ty
+uv
+
+basedpyright
+
+cffi>=2.0.0
+cryptography>=46.0.3
+distro>=1.9.0
+linkify-it-py>=2.0.3
+markdown-it-py>=4.0.0
+markupsafe>=3.0.3
+mdit-py-plugins>=0.5.0
+mdurl>=0.1.2
+packaging>=25.0
+platformdirs>=4.5.0
+prompt-toolkit>=3.0.52
+pycparser>=2.23
+pygments>=2.19.2
+pyperclip>=1.11.0
+pyyaml>=6.0.3
+resolvelib>=1.2.1
+typing-extensions>=4.15.0
+uc-micro-py>=1.0.3
+ujson>=5.11.0
+wcwidth>=0.2.14
+
+# Xonsh and plugins
+# -----------------
+# ---- psutil is used for a reporting function in rc.xsh
+psutil>=7.1.0
+xonsh>=0.21
+xontrib-argcomplete>=0.3
+xontrib-fzf-widgets>=0.0.4
+xontrib-prompt-starship>=0.3
+xontrib-sh>=0.3
