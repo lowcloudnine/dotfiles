@@ -81,11 +81,7 @@ aliases['ls'] = "eza"
 aliases['ll'] = "eza -al"
 aliases["fd"] = "fdfind -E snap"
 aliases["pwd"] = display_current_dir 
-<<<<<<< HEAD
 aliases["tree"] = "tree -C -I '.git' -I '__pycache__' -I '*.egg-info'"
-=======
-aliases["tree"] = "tree -C -I '.git' -I '__pycache__'"
->>>>>>> abee7d0 (various updates and add F1 help to zellij)
 
 aliases["ldock"] = "lazydocker"
 aliases["lgit"] = "lazygit"
