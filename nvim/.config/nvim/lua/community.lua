@@ -6,16 +6,18 @@
 return {
 	"AstroNvim/astrocommunity",
 
+	-- Docker
+	{ import = "astrocommunity.docker.lazydocker" },
 	-- Packs
 	{ import = "astrocommunity.pack.ansible" },
 	{ import = "astrocommunity.pack.bash" },
-	{ import = "astrocommunity.pack.cmake" },
-	{ import = "astrocommunity.pack.cpp" },
+	-- { import = "astrocommunity.pack.cmake" },
+	-- { import = "astrocommunity.pack.cpp" },
 	{ import = "astrocommunity.pack.docker" },
 	{ import = "astrocommunity.pack.go" },
 	{ import = "astrocommunity.pack.helm" },
 	{ import = "astrocommunity.pack.html-css" },
-	{ import = "astrocommunity.pack.java" },
+	-- { import = "astrocommunity.pack.java" },
 	{ import = "astrocommunity.pack.json" },
 	{ import = "astrocommunity.pack.lua" },
 	{ import = "astrocommunity.pack.markdown" },
