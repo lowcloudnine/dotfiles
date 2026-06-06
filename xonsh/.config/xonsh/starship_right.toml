@@ -1,0 +1,14 @@
+format = "$cmd_duration$username$hostname"
+
+[cmd_duration]
+min_time = 5000
+format = "⌛ [$duration](bold yellow) "
+show_milliseconds = true 
+
+[username]
+format = "[👤 $user](grey) "
+show_always = true
+
+[hostname]
+format = "[🖥 $hostname](grey)"
+ssh_only = false

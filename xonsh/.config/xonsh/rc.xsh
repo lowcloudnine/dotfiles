@@ -26,6 +26,7 @@ def display_current_dir():
 
 $SHELL_TYPE = "best"
 $STARSHIP_CONFIG = Path(__file__).parent / "starship_xonsh.toml"
+$XONTRIB_PROMPT_STARSHIP_RIGHT_CONFIG = Path(__file__).parent / "starship_right.toml"
 $VI_MODE = True
 # ---- fzf
 skip_dirs = ".git,.venv,.idea,.vscode,__pycache__,node_modules,target"
@@ -45,11 +46,15 @@ $PATH.append("$HOME/go/bin")
 # Load Xontribs
 # -------------------------------------
 
-xontrib load argcomplete
+$XONTRIB_CD_LONG_DURATION = 2  # default
+
+xontrib load autoxsh
+xontrib load clp
 xontrib load coreutils
-xontrib load "fzf-widgets"
+xontrib load cmd_done
+xontrib load ergopack
+xontrib load "fzf-completions"
 xontrib load prompt_starship
-xontrib load sh
 
 # ---- Configurations for Xontribs
 $XLSD_SORT_METHOD = "directories_first"
