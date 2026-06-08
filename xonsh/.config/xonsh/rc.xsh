@@ -102,13 +102,13 @@ aliases["dev"] = "source-bash $HOME/.envs/dev/bin/activate"
 # -------------------------------------
 
 $XDG_DATA_DIRS.append("/var/lib/flatpak/exports/share")
-$XDG_DATA_DIRS.append("/home/wodan/.local/share/flatpak/exports/share")
+$XDG_DATA_DIRS.append(str(Path.home() / ".local/share/flatpak/exports/share"))
 
 # -------------------------------------
 # Node Version Manager, Node and NPM
 # -------------------------------------
 
-$NVM_DIR = "/home/wodan/.nvm"
+$NVM_DIR = str(Path.home() / ".nvm")
 source-bash $NVM_DIR/nvm.sh
 # nvm use stable
 

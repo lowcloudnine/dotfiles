@@ -17,7 +17,7 @@ rustup upgrade # <-- rustup is installed via snap so only update rust here
 uv self update
 uv tool upgrade --all
 
-source /home/wodan/.envs/dev/bin/activate
+source "$HOME/.envs/dev/bin/activate"
 uv pip install --upgrade ansible
 uv pip install --upgrade ruff
 uv pip install --upgrade click

@@ -349,11 +349,12 @@ mouse_mode false
 
 // The folder in which Zellij will look for layouts
 //
-layout_dir "/home/user/.config/zellij/layouts"
+// Uses Zellij's default layout directory under the active config directory.
+// Set this in an untracked local override if a machine needs a custom path.
 
 // The folder in which Zellij will look for themes
 //
-// theme_dir "/home/user/.config/zellij/themes"
+// theme_dir "/path/to/zellij/themes"
 
 // Set some UI stuff
 // ui {

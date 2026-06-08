@@ -1,0 +1,152 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo_dir=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+
+packages=(
+    bin
+    fastfetch
+    git
+    kitty
+    nvim
+    py_libs
+    xonsh
+    zellij
+)
+
+usage() {
+    cat <<'EOF'
+Usage:
+  ./bootstrap [--dry-run|--install|--unstow] [--yes] [package...]
+  ./bootstrap --list
+
+Options:
+  --dry-run  Preview Stow operations without changing files. This is the default.
+  --install  Stow selected packages into the parent directory, usually $HOME.
+  --unstow   Remove selected package symlinks.
+  --yes      Skip confirmation for --install or --unstow.
+  --list     Print available packages.
+  --help     Show this help.
+
+Examples:
+  ./bootstrap
+  ./bootstrap --dry-run nvim xonsh
+  ./bootstrap --install --yes git kitty
+  ./bootstrap --unstow nvim
+EOF
+}
+
+list_packages() {
+    printf "%s\n" "${packages[@]}"
+}
+
+is_package() {
+    local candidate=$1
+    local package
+
+    for package in "${packages[@]}"; do
+        [[ $candidate == "$package" ]] && return 0
+    done
+
+    return 1
+}
+
+confirm() {
+    local action=$1
+
+    if [[ ! -t 0 ]]; then
+        printf "Refusing to %s without --yes because stdin is not interactive.\n" "$action" >&2
+        exit 1
+    fi
+
+    read -r -p "Run stow ${action} for selected package(s)? [y/N] " reply
+    case $reply in
+        [Yy]|[Yy][Ee][Ss]) ;;
+        *) printf "Aborted.\n"; exit 1 ;;
+    esac
+}
+
+mode=dry-run
+assume_yes=false
+selected=()
+
+while (($#)); do
+    case $1 in
+        --dry-run)
+            mode=dry-run
+            ;;
+        --install)
+            mode=install
+            ;;
+        --unstow)
+            mode=unstow
+            ;;
+        --yes)
+            assume_yes=true
+            ;;
+        --list)
+            list_packages
+            exit 0
+            ;;
+        --help|-h)
+            usage
+            exit 0
+            ;;
+        --)
+            shift
+            while (($#)); do
+                selected+=("$1")
+                shift
+            done
+            break
+            ;;
+        -*)
+            printf "Unknown option: %s\n\n" "$1" >&2
+            usage >&2
+            exit 1
+            ;;
+        *)
+            selected+=("$1")
+            ;;
+    esac
+    shift
+done
+
+if ! command -v stow >/dev/null; then
+    printf "GNU Stow is required but was not found in PATH.\n" >&2
+    exit 1
+fi
+
+cd "$repo_dir"
+
+if ((${#selected[@]} == 0)); then
+    selected=("${packages[@]}")
+fi
+
+for package in "${selected[@]}"; do
+    if ! is_package "$package"; then
+        printf "Unknown package: %s\n\nAvailable packages:\n" "$package" >&2
+        list_packages >&2
+        exit 1
+    fi
+done
+
+case $mode in
+    dry-run)
+        stow_args=(-n -v)
+        ;;
+    install)
+        stow_args=(-v)
+        if [[ $assume_yes != true ]]; then confirm "install"; fi
+        ;;
+    unstow)
+        stow_args=(-D -v)
+        if [[ $assume_yes != true ]]; then confirm "unstow"; fi
+        ;;
+esac
+
+for package in "${selected[@]}"; do
+    printf "\n==> %s: %s\n" "$mode" "$package"
+    stow "${stow_args[@]}" "$package"
+done
