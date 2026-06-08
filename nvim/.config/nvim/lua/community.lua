@@ -1,34 +1,23 @@
--- AstroCommunity imports managed by this dotfiles repository.
--- This file is intended to overlay an existing AstroNvim base config.
+--if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+
+-- AstroCommunity: import any community modules here
+-- We import this file in `lazy_setup.lua` before the `plugins/` folder.
+-- This guarantees that the specs are processed before any user plugins.
 
 ---@type LazySpec
 return {
-	"AstroNvim/astrocommunity",
+  "AstroNvim/astrocommunity",
 
-	-- Docker
-	{ import = "astrocommunity.docker.lazydocker" },
+  { import = "astrocommunity.pack.lua" },
 
-	-- Packs
-	{ import = "astrocommunity.pack.ansible" },
-	{ import = "astrocommunity.pack.bash" },
-	{ import = "astrocommunity.pack.docker" },
-	{ import = "astrocommunity.pack.go" },
-	{ import = "astrocommunity.pack.helm" },
-	{ import = "astrocommunity.pack.html-css" },
-	{ import = "astrocommunity.pack.json" },
-	{ import = "astrocommunity.pack.lua" },
-	{ import = "astrocommunity.pack.markdown" },
-	{ import = "astrocommunity.pack.python" },
-	{ import = "astrocommunity.pack.rust" },
-	{ import = "astrocommunity.pack.terraform" },
-	{ import = "astrocommunity.pack.toml" },
-	{ import = "astrocommunity.pack.vue" },
-	{ import = "astrocommunity.pack.xml" },
-	{ import = "astrocommunity.pack.yaml" },
+  -- Base pack with basedpyright and ruff
+  { import = "astrocommunity.pack.python.base" },
+  { import = "astrocommunity.pack.python.basedpyright" },
+  { import = "astrocommunity.pack.python.ruff" },
 
-	-- Markdown and LaTex
-	{ import = "astrocommunity.markdown-and-latex.vimtex" },
+  -- Markdown
+  { import = "astrocommunity.pack.markdown" },
 
-	-- Recipes
-	{ import = "astrocommunity.recipes.heirline-mode-text-statusline" },
+  -- Recipes
+  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
 }
