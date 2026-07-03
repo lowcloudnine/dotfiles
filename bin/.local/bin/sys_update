@@ -1,4 +1,4 @@
-#!/usr/bin/env  bash
+#!/usr/bin/env xonsh
 
 # Ubuntu 24 system updates and anything installeld via apt
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
@@ -13,11 +13,16 @@ flatpak update
 # Update various languages and other packages of stuff
 rustup upgrade # <-- rustup is installed via snap so only update rust here
 
+# Update the Codex CLI
+npm install -g @openai/codex@latest
+
 # Update Python and the dev env libs
 uv self update
+
+source-bash /home/wodan/.envs/dev/bin/activate
+
 uv tool upgrade --all
 
-source "$HOME/.envs/dev/bin/activate"
 uv pip install --upgrade ansible
 uv pip install --upgrade ruff
 uv pip install --upgrade click

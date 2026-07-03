@@ -49,11 +49,14 @@ $PATH.append("$HOME/go/bin")
 $XONTRIB_CD_LONG_DURATION = 2  # default
 
 xontrib load autoxsh
+xontrib load argcomplete
+xontrib load back2dir
 xontrib load clp
-xontrib load coreutils
 xontrib load cmd_done
-xontrib load ergopack
+xontrib load coreutils
 xontrib load "fzf-completions"
+xontrib load direnv
+xontrib load kitty
 xontrib load prompt_starship
 
 # ---- Configurations for Xontribs
@@ -117,3 +120,9 @@ source-bash $NVM_DIR/nvm.sh
 # -------------------------------------
 
 source-bash $HOME/.envs/dev/bin/activate
+
+# -------------------------------------
+# Activate zoxide
+# -------------------------------------
+
+execx($(zoxide init xonsh), 'exec', __xonsh__.ctx, filename='zoxide')

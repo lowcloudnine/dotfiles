@@ -1,12 +1,23 @@
 [user]
 	name = lowcloudnine
 	email = lowcloudnine@hotmail.com
+
 [core]
 	editor = vim
+	pager = delta
+
 [color]
 	ui = true
+
 [commit]
     template = ~/.gitmessage.txt
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true
+
+[merge]
+    conflictStyle = zdiff3
 
 [alias]
     tree = log --graph --decorate --pretty=oneline --abbrev-commit
