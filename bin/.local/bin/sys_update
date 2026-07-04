@@ -1,7 +1,9 @@
 #!/usr/bin/env xonsh
 
 # Ubuntu 24 system updates and anything installeld via apt
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get autoremove -y
 
 # Update the various snaps
 sudo snap refresh
