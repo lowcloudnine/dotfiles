@@ -1,0 +1,1 @@
+# Intentionally minimal: avoids libedit choking on /etc/inputrc during Xonsh startup.

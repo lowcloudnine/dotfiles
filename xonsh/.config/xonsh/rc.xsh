@@ -6,6 +6,7 @@ $FOREIGN_ALIASES_SUPPRESS_SKIP_MESSAGE = True
 # Imports
 # -------------------------------------
 
+import os
 import platform
 from pathlib import Path
 
@@ -23,10 +24,12 @@ def display_current_dir():
 # -------------------------------------
 # Environment Variables
 # -------------------------------------
-
+# TODO: Fix me?
 $SHELL_TYPE = "best"
 $STARSHIP_CONFIG = Path(__file__).parent / "starship_xonsh.toml"
-$XONTRIB_PROMPT_STARSHIP_RIGHT_CONFIG = Path(__file__).parent / "starship_right.toml"
+_xonsh_inputrc = str(Path(__file__).parent / "inputrc")
+os.environ["INPUTRC"] = _xonsh_inputrc
+$INPUTRC = _xonsh_inputrc
 $VI_MODE = True
 # ---- fzf
 skip_dirs = ".git,.venv,.idea,.vscode,__pycache__,node_modules,target"
@@ -97,9 +100,6 @@ aliases["lgit"] = "lazygit"
 # ---- Python Env Activates
 aliases["dev"] = "source-bash $HOME/.envs/dev/bin/activate"
 
-# ---- kubectl aliases # if using microk8s
-# aliases["mkctl"] = "microk8s kubectl"
-
 # -------------------------------------
 # Flatpak Stuff
 # -------------------------------------
@@ -114,12 +114,6 @@ $XDG_DATA_DIRS.append(str(Path.home() / ".local/share/flatpak/exports/share"))
 $NVM_DIR = str(Path.home() / ".nvm")
 source-bash $NVM_DIR/nvm.sh
 # nvm use stable
-
-# -------------------------------------
-# Activate a Default Python Env
-# -------------------------------------
-
-source-bash $HOME/.envs/dev/bin/activate
 
 # -------------------------------------
 # Activate zoxide

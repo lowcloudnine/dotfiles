@@ -3,4 +3,4 @@ success_symbol = "[@](bold green)"
 error_symbol = "[@](bold red)"
 
 [cmd_duration]
-disabled = true
+disabled = false
