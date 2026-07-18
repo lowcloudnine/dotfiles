@@ -113,7 +113,20 @@ $XDG_DATA_DIRS.append(str(Path.home() / ".local/share/flatpak/exports/share"))
 
 $NVM_DIR = str(Path.home() / ".nvm")
 source-bash $NVM_DIR/nvm.sh
+$PATH.insert(0, $NVM_BIN)
 # nvm use stable
+
+# -------------------------------------
+# Ensure dev environment is available
+# -------------------------------------
+
+source-bash $HOME/.envs/dev/bin/activate
+
+# -------------------------------------
+# Automatically activate project virtual environments
+# -------------------------------------
+
+source @(Path(__file__).parent / "xshrc" / "auto_activate_virtualenv.xsh")
 
 # -------------------------------------
 # Activate zoxide

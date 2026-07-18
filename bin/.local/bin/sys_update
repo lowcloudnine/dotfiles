@@ -1,5 +1,8 @@
 #!/usr/bin/env xonsh
 
+from pathlib import Path
+from subprocess import check_output
+
 # Ubuntu 24 system updates and anything installeld via apt
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -11,6 +14,18 @@ sudo snap refresh
 # Update any flatpak packages
 sudo flatpak update
 flatpak update
+
+# Update NVM and install the current stable Node.js release
+$NVM_DIR = str(Path.home() / ".nvm")
+git -C $NVM_DIR fetch --tags origin
+nvm_tag = check_output(
+    ["git", "-C", $NVM_DIR, "tag", "--list", "v*", "--sort=-version:refname"],
+    text=True,
+).splitlines()[0]
+git -C $NVM_DIR checkout --detach @(nvm_tag)
+source-bash $NVM_DIR/nvm.sh
+nvm install node
+nvm alias default node
 
 # Update various languages and other packages of stuff
 rustup upgrade # <-- rustup is installed via snap so only update rust here
