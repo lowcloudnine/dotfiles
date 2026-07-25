@@ -3,43 +3,92 @@
 from pathlib import Path
 from subprocess import check_output
 
-# Ubuntu 24 system updates and anything installeld via apt
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get autoremove -y
+from rich.console import Console
 
-# Update the various snaps
-sudo snap refresh
+console = Console() 
 
-# Update any flatpak packages
-sudo flatpak update
-flatpak update
 
-# Update NVM and install the current stable Node.js release
-$NVM_DIR = str(Path.home() / ".nvm")
-git -C $NVM_DIR fetch --tags origin
-nvm_tag = check_output(
-    ["git", "-C", $NVM_DIR, "tag", "--list", "v*", "--sort=-version:refname"],
-    text=True,
-).splitlines()[0]
-git -C $NVM_DIR checkout --detach @(nvm_tag)
-source-bash $NVM_DIR/nvm.sh
-nvm install node
-nvm alias default node
+def apt_procs() -> None:
+    """Ubuntu system updates and anything installeld via apt."""
+    sudo apt-get update
+    sudo apt-get upgrade -y
+    sudo apt-get autoremove -y
 
-# Update various languages and other packages of stuff
-rustup upgrade # <-- rustup is installed via snap so only update rust here
 
-# Update the Codex CLI
-npm install -g @openai/codex@latest
+def snap_update() -> None:
+    """Update snap packages."""
+    sudo snap refresh
 
-# Update Python and the dev env libs
-uv self update
 
-source-bash /home/wodan/.envs/dev/bin/activate
+def flatpak_update() -> None:
+    """Update flatpak packages."""
+    sudo flatpak update
+    flatpak update
 
-uv tool upgrade --all
 
-uv pip install --upgrade ansible
-uv pip install --upgrade ruff
-uv pip install --upgrade click
+def node_update() -> None:
+    """Update NVM and install the current stable Node.js release."""
+    $NVM_DIR = str(Path.home() / ".nvm")
+    git -C $NVM_DIR fetch --tags origin
+    nvm_tag = check_output(
+        ["git", "-C", $NVM_DIR, "tag", "--list", "v*", "--sort=-version:refname"],
+        text=True,
+    ).splitlines()[0]
+    git -C $NVM_DIR checkout --detach @(nvm_tag)
+    source-bash $NVM_DIR/nvm.sh
+    nvm install node
+    nvm alias default node
+
+
+def node_progs_update() -> None:
+    """Update node programs."""
+    # Update the Codex CLI
+    console.print("Updating codex to latest ...")
+    npm install -g @openai/codex@latest
+    codex_ver = $(codex --version) 
+    console.print(f"Codex version: {codex_ver}") 
+
+
+def rust_update() -> None:
+    """Update various languages and other packages of stuff."""
+    # rustup is installed via snap so only update rust here
+    # RUN snap_update before this function
+    rustup upgrade 
+
+
+def dev_env_update() -> None:
+    """Update uv and the dev env libs."""
+    # Update uv 
+    uv self update
+
+    # Activate the dev environment
+    source-bash /home/wodan/.envs/dev/bin/activate
+
+    # Then update all tooling
+    uv tool upgrade --all
+
+    uv pip install --upgrade ansible
+    uv pip install --upgrade ruff
+    uv pip install --upgrade click
+
+
+def main() -> None:
+    """Run all update functionality."""
+    update_funcs = [
+        apt_procs,
+        snap_update,
+        flatpak_update,
+        node_update,
+        node_progs_update,
+        rust_update,
+        dev_env_update,
+    ]
+    for func in update_funcs:
+        console.print(f"\n{func.__name__}")
+        console.print("-" * 40)
+        func()
+
+
+if __name__ == "__main__":
+    main()
+
